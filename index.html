@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JS Calculator</title>
+    <title>Pomodoro Clock</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="index.js"></script>
@@ -19,9 +19,13 @@
             padding: 0;
             margin: 0;
             font-family: 'Lato', sans-serif;
+
+            -webkit-transition: all 0.7s ease;
+            -moz-transition: all 0.7s ease;
+            -ms-transition: all 0.7s ease;
+            -o-transition: all 0.7s ease;
+            transition: all 0.7s ease;
         }
-
-
 
         .app {
             display: flex;
@@ -30,14 +34,14 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            background: rgb(255,174,39);
-            background: -moz-linear-gradient(-45deg, rgba(255,174,39,1) 0%, rgba(222,73,109,1) 100%);
-            background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,174,39,1)), color-stop(100%,rgba(222,73,109,1)));
-            background: -webkit-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
-            background: -o-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
-            background: -ms-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
-            background: linear-gradient(135deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffae27', endColorstr='#de496d',GradientType=1 );
+            background: rgb(255, 174, 39);
+            background: -moz-linear-gradient(-45deg, rgba(255, 174, 39, 1) 0%, rgba(222, 73, 109, 1) 100%);
+            background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(255, 174, 39, 1)), color-stop(100%, rgba(222, 73, 109, 1)));
+            background: -webkit-linear-gradient(-45deg, rgba(255, 174, 39, 1) 0%, rgba(222, 73, 109, 1) 100%);
+            background: -o-linear-gradient(-45deg, rgba(255, 174, 39, 1) 0%, rgba(222, 73, 109, 1) 100%);
+            background: -ms-linear-gradient(-45deg, rgba(255, 174, 39, 1) 0%, rgba(222, 73, 109, 1) 100%);
+            background: linear-gradient(135deg, rgba(255, 174, 39, 1) 0%, rgba(222, 73, 109, 1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffae27', endColorstr='#de496d', GradientType=1);
         }
 
         a {
@@ -73,11 +77,11 @@
             cursor: pointer;
         }
 
-        div#break, div#session{
+        div#break, div#session {
             margin-top: 10px;
         }
 
-        #session-display, #break-display{
+        #session-display, #break-display {
             font-size: 32px;
             text-align: center;
         }
@@ -99,7 +103,7 @@
             <div id="session-display" class="display">25:00</div>
             <button id="session-pos" class="btn btn-primary btn-block">+</button>
         </div>
-        <div id="display">25:00</div>
+        <div id="display" class="text-center">25:00</div>
         <button id="reset" class="btn btn-danger btn-block">Reset</button>
     </div>
     <div class="row">

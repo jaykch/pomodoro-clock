@@ -79,21 +79,16 @@ var pomodoro = {
                         this.config.displaySecVal = 60;
                     }
                     this.config.displaySecVal -= 1;
-                    console.log(this.config.breakControl);
 
                     if (this.config.displayMinVal === 0 && this.config.displaySecVal === 0) {
                         if (this.config.breakControl === 1) {
                             this.config.breakControl = 0;
+                            this.config.displayMinVal = this.config.breakVal;
                         }
                         else if (this.config.breakControl === 0) {
                             this.config.breakControl = 1;
-                        }
-
-                        if (this.config.breakControl === 1) {
-                            this.config.displayMinVal = this.config.breakVal;
-                        }
-                        if (this.config.breakControl === 0) {
                             this.config.displayMinVal = this.config.sessionVal;
+
                         }
                     }
 
@@ -104,6 +99,10 @@ var pomodoro = {
         }.bind(this));
     },
 
+    restrictedActivity: function () {
+        alert("You cannot use this action while the clock is running");
+    },
+
     sessionSelectHandler: function () {
 
         this.$sneg.click(function () {
@@ -112,7 +111,8 @@ var pomodoro = {
                 this.config.displayMinVal = this.config.sessionVal;
                 this.config.displaySecVal = 0;
                 this.render();
-            }
+            } else this.restrictedActivity();
+
         }.bind(this));
         this.$spos.click(function () {
             if (this.config.clockControl === 0) {
@@ -120,7 +120,8 @@ var pomodoro = {
                 this.config.displayMinVal = this.config.sessionVal;
                 this.config.displaySecVal = 0;
                 this.render();
-            }
+            } else this.restrictedActivity();
+
         }.bind(this));
     },
     breakSelectHandler: function () {
@@ -130,7 +131,7 @@ var pomodoro = {
                 this.config.displayMinVal = this.config.sessionVal;
                 this.config.displaySecVal = 0;
                 this.render();
-            }
+            } else this.restrictedActivity();
         }.bind(this));
         this.$bpos.click(function () {
             if (this.config.clockControl === 0) {
@@ -138,7 +139,7 @@ var pomodoro = {
                 this.config.displayMinVal = this.config.sessionVal;
                 this.config.displaySecVal = 0;
                 this.render();
-            }
+            } else this.restrictedActivity();
         }.bind(this));
     },
 
@@ -159,11 +160,27 @@ var pomodoro = {
     render: function () {
         this.$break.html(this.config.breakVal + ":00");
         this.$session.html(this.config.sessionVal + ":00");
+
+
         if (this.config.displaySecVal < 10) {
-            this.$display.html(this.config.displayMinVal + ":0" + this.config.displaySecVal);
+            if (this.config.breakControl === 1) {
+                this.$display.html("Break!<br>" + this.config.displayMinVal + ":0" + this.config.displaySecVal);
+
+            }
+            else if (this.config.breakControl === 0) {
+                this.$display.html("Session<br>" + this.config.displayMinVal + ":0" + this.config.displaySecVal);
+
+            }
         }
         else {
-            this.$display.html(this.config.displayMinVal + ":" + this.config.displaySecVal);
+            if (this.config.breakControl === 1) {
+                this.$display.html("Break!<br>" + this.config.displayMinVal + ":" + this.config.displaySecVal);
+
+            }
+            else if (this.config.breakControl === 0) {
+                this.$display.html("Session<br>" + this.config.displayMinVal + ":" + this.config.displaySecVal);
+
+            }
         }
         this.displayColorHandler();
     }
