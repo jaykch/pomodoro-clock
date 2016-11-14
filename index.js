@@ -15,9 +15,9 @@ var pomodoro = {
         breakVal: 5,
         sessionVal: 25,
         displayMinVal: 25,
-        displaySecVal: 0
-
-
+        displaySecVal: 0,
+        clockControl: 0,
+        breakControl: 0
     },
 
     init: function () {
@@ -27,6 +27,7 @@ var pomodoro = {
         this.render();
         this.sessionSelectHandler();
         this.breakSelectHandler();
+        this.clockHandler();
     },
 
     getDomElements: function () {
@@ -47,26 +48,58 @@ var pomodoro = {
         }.bind(this));
     },
 
+    clockHandler: function () {
+        this.$display.click(function () {
+            if (this.config.clockControl === 0) {
+                this.config.clockControl = 1;
+            } else {
+                this.config.clockControl = 0;
+            }
+            console.log(this.config.clockControl);
+
+            if (this.config.clockControl === 1) {
+                setInterval(function () {
+                    if (this.config.displaySecVal == 0) {
+                        this.config.displayMinVal -= 1;
+                        this.config.displaySecVal = 60;
+                    }
+                    this.config.displaySecVal -= 1;
+                    this.render();
+                }.bind(this), 1000);
+            }
+
+        }.bind(this));
+    },
+
     sessionSelectHandler: function () {
+
         this.$sneg.click(function () {
-            if (this.config.sessionVal > 1)this.config.sessionVal -= 1;
-            this.config.displayMinVal = this.config.sessionVal;
-            this.render();
+            if (this.config.clockControl === 0) {
+                if (this.config.sessionVal > 1)this.config.sessionVal -= 1;
+                this.config.displayMinVal = this.config.sessionVal;
+                this.render();
+            }
         }.bind(this));
         this.$spos.click(function () {
-            this.config.sessionVal += 1;
-            this.config.displayMinVal = this.config.sessionVal;
-            this.render();
+            if (this.config.clockControl === 0) {
+                this.config.sessionVal += 1;
+                this.config.displayMinVal = this.config.sessionVal;
+                this.render();
+            }
         }.bind(this));
     },
     breakSelectHandler: function () {
         this.$bneg.click(function () {
-            if (this.config.breakVal > 1)this.config.breakVal -= 1;
-            this.render();
+            if (this.config.clockControl === 0) {
+                if (this.config.breakVal > 1)this.config.breakVal -= 1;
+                this.render();
+            }
         }.bind(this));
         this.$bpos.click(function () {
-            this.config.breakVal += 1;
-            this.render();
+            if (this.config.clockControl === 0) {
+                this.config.breakVal += 1;
+                this.render();
+            }
         }.bind(this));
     },
 
@@ -88,7 +121,7 @@ var pomodoro = {
             this.$display.html(this.config.displayMinVal + ":0" + this.config.displaySecVal);
         }
         else {
-            this.$display.html(this.config.displayMinVal + this.config.displaySecVal);
+            this.$display.html(this.config.displayMinVal + ":" + this.config.displaySecVal);
         }
     }
 };
