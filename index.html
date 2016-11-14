@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato');
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+        }
+
+
+
         .app {
             display: flex;
             flex-flow: column nowrap;
@@ -20,22 +30,14 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            background: rgb(138, 139, 166);
-        }
-
-        button.digit {
-            margin: 5px;
-        }
-
-        #screen {
-            margin: 10px 20px;
-            height: 50px;
-            background: rgba(28, 78, 85, 0.74);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            color: white;
+            background: rgb(255,174,39);
+            background: -moz-linear-gradient(-45deg, rgba(255,174,39,1) 0%, rgba(222,73,109,1) 100%);
+            background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,174,39,1)), color-stop(100%,rgba(222,73,109,1)));
+            background: -webkit-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
+            background: -o-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
+            background: -ms-linear-gradient(-45deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
+            background: linear-gradient(135deg, rgba(255,174,39,1) 0%,rgba(222,73,109,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffae27', endColorstr='#de496d',GradientType=1 );
         }
 
         a {
@@ -56,18 +58,51 @@
             text-decoration: none;
         }
 
+        #display {
+            height: 300px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.43);
+            border: 4px solid #0e0b49;
+            border-radius: 20%;
+            margin: 50px;
+            font-size: 64px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div#break, div#session{
+            margin-top: 10px;
+        }
+
+        #session-display, #break-display{
+            font-size: 32px;
+            text-align: center;
+        }
 
     </style>
 </head>
 <body>
 <div class="app">
-    <div class="container">
-        <div class="row">
+    <div>
+        <div id="break">
+            <button id="break-neg" class="btn btn-primary btn-block">-</button>
+            <div id="break-display" class="display">1:00</div>
+            <button id="break-pos" class="btn btn-primary btn-block">+</button>
         </div>
-        <div class="row">
-            <footer class="text-center"><a href="https://github.com/jaykch/calculator" target="_blank">GitHub Link</a>
-            </footer>
+        <div id="session">
+            <button id="session-neg" class="btn btn-primary btn-block">-</button>
+            <div id="session-display" class="display">25:00</div>
+            <button id="session-pos" class="btn btn-primary btn-block">+</button>
         </div>
+        <div id="display">25:00</div>
+        <button id="reset" class="btn btn-danger btn-block">Reset</button>
+    </div>
+    <div class="row">
+        <footer class="text-center"><a href="https://github.com/jaykch/pomodoro-clock" target="_blank">GitHub
+            Link</a>
+        </footer>
     </div>
 </div>
 
